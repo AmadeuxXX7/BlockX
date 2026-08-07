@@ -1,8 +1,10 @@
 from tkinter import Tk, Frame, Button, Menu
 import tkinter as tk
 from bloques import createBlocks, code, Play, Save, New, Open
+import os
 
-VERSION = "0.2.0"
+
+VERSION = "0.2.1"
 
 # ======== Window ======== #
 
@@ -20,7 +22,7 @@ window.config(menu=barMenu)
 # File
 fileMenu = Menu(barMenu, tearoff=0)
 fileMenu.add_command(label="New", command=lambda:New(blockConsole))
-fileMenu.add_command(label="Save as", command=lambda:Save())
+fileMenu.add_command(label="Save as", command=lambda:Save(VERSION))
 fileMenu.add_command(label="Open", command=lambda:Open(blockConsole, block_counter))
 fileMenu.add_separator()
 fileMenu.add_command(label="Exit", command=lambda:window.quit())
@@ -29,9 +31,18 @@ infoMenu = Menu(barMenu, tearoff=0)
 infoMenu.add_command(label="Version", command=lambda:print(VERSION))
 infoMenu.add_command(label="Credits", command=lambda:print("Amadeo Malko Rivadeneira"))
 infoMenu.add_command(label="License", command=lambda:print("Mozilla Public License, v. 2.0"))
+# Console
+consoleMenu = Menu(barMenu, tearoff=0)
+def Clear():
+    if os.name == "nt": #Windows
+        os.system("cls")
+    elif os.name == "posix": #Linux/Mac
+        os.system("clear")
+consoleMenu.add_command(label="Clear", command=lambda:Clear())
 
 barMenu.add_cascade(label="File", menu=fileMenu)
 barMenu.add_cascade(label="Info", menu=infoMenu)
+barMenu.add_cascade(label="Console", menu=consoleMenu)
 
 # ======== Paleta ======== #
 
