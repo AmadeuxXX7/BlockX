@@ -1,8 +1,11 @@
 from tkinter import Frame, Label, Entry, Menu, filedialog
 from editor import *
 import json
+import os
 
 code = []
+
+# Entry 
 
 def setEntry(event):
     entry = event.widget
@@ -101,44 +104,36 @@ def createBlocks(paleta, blockConsole, block_counter):
 
 # Save System
 
-def Save():
-    data = []
-    for block_info, entry in code: 
-        data.append({"type": block_info["type"], "value": entry.get() if entry else ""})
-    #print(data)
-    file_path = filedialog.asksaveasfilename(initialfile="untitled", defaultextension=".bx", filetypes=[("BlockX", "*.bx")], title="Guardar como")
-    if not file_path: return
-    with open(file_path, "w", encoding="utf-8") as file: json.dump(data, file)
-    print("Saved proyect")
+file_name = "untitled"
 
 
 def New(blockConsole):
+    global file_name
     for widget in blockConsole.winfo_children(): 
         widget.destroy()
     code.clear()
+    file_name = "untitled"
 
 
-def Save():
+def Save(VERSION):
+    global file_name
     data = []
     for block_info, entry in code: 
         data.append({"type": block_info["type"], "value": entry.get() if entry else ""})
-    #print(data)
-    file_path = filedialog.asksaveasfilename(initialfile="untitled", defaultextension=".bx", filetypes=[("BlockX", "*.bx")], title="Guardar como")
+    file_path = filedialog.asksaveasfilename(initialfile=file_name, defaultextension=".bx", filetypes=[("BlockX", "*.bx")], title="Guardar como")
     if not file_path: return
-    with open(file_path, "w", encoding="utf-8") as file: json.dump(data, file)
+    file_name = os.path.splitext(os.path.basename(file_path))[0]
+    project = [file_name, VERSION, data]
+    with open(file_path, "w", encoding="utf-8") as file: json.dump(project, file)
     print("Saved proyect")
-
-
-def New(blockConsole):
-    for widget in blockConsole.winfo_children(): 
-        widget.destroy()
-    code.clear()
 
 
 def Open(blockConsole, block_counter):
+    global file_name
     file_path = filedialog.askopenfilename(filetypes=[("BlockX", "*.bx")], title="Abrir")
     if not file_path: return
-    with open(file_path, "r", encoding="utf-8") as file: data = json.load(file)
+    with open(file_path, "r", encoding="utf-8") as file: project = json.load(file)
+    file_name, _, data = project
     for bloque in data:
         for info in BLOCKS:
             if info["type"] == bloque["type"]:
