@@ -18,7 +18,7 @@ BLOCKS:
   "color": ... #The color of the block (color name)
 }
 
-What the block does is in the function Play()
+What does the block does is in the function Play()
 
 The module bloques.py creates the blocks according to what there is in editor.py,
 this module also contains the save system.
