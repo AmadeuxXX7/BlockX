@@ -4,7 +4,7 @@ from bloques import createBlocks, code, Play, Save, New, Open
 import os
 
 
-VERSION = "0.2.1"
+VERSION = "0.2.2"
 
 # ======== Window ======== #
 
