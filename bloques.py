@@ -123,17 +123,30 @@ def Save(VERSION):
     file_path = filedialog.asksaveasfilename(initialfile=file_name, defaultextension=".bx", filetypes=[("BlockX", "*.bx")], title="Guardar como")
     if not file_path: return
     file_name = os.path.splitext(os.path.basename(file_path))[0]
-    project = [file_name, VERSION, data]
-    with open(file_path, "w", encoding="utf-8") as file: json.dump(project, file)
+    project = {"file_name": file_name,"version": VERSION,"blocks": data}
+    with open(file_path, "w", encoding="utf-8") as file: 
+        json.dump(project, file)
     print("Saved proyect")
 
 
 def Open(blockConsole, block_counter):
     global file_name
+
+    # Ask file
     file_path = filedialog.askopenfilename(filetypes=[("BlockX", "*.bx")], title="Abrir")
     if not file_path: return
-    with open(file_path, "r", encoding="utf-8") as file: project = json.load(file)
-    file_name, _, data = project
+
+    #Open it
+    for widget in blockConsole.winfo_children(): 
+        widget.destroy()
+    code.clear()
+
+    with open(file_path, "r", encoding="utf-8") as file: 
+        project = json.load(file)
+
+    file_name = project["file_name"]
+    data = project["blocks"]
+
     for bloque in data:
         for info in BLOCKS:
             if info["type"] == bloque["type"]:
