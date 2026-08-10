@@ -3,6 +3,7 @@ it was inpired by Scratch.
 This program is made in Python.
 
 VERSION = 0.2.2
+
 You can see this constant in main.py
 
 In editor.py there are the blocks that are on the program,
