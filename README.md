@@ -27,7 +27,7 @@ BLOCKS:
   
 }
 
-What does the block does is in the function Play()
+What does the block do is in the function Play()
 
 The module bloques.py creates the blocks according to what there is in editor.py,
 this module also contains the save system.
