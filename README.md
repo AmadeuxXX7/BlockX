@@ -9,6 +9,7 @@ In editor.py there are the blocks that are on the program,
 the blocks are:
 * print()
 * wait()
+
 How the blocks are is writed in the list BLOCKS
 BLOCKS:
 {
