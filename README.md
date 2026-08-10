@@ -15,8 +15,11 @@ How the blocks are is writed in the list BLOCKS
 BLOCKS:
 {
   "type": ..., #The name of the block ("string")
+  
   "entry": ..., #If it has an entry (boolean)
+  
   "numeric": ..., #It is no necesary if entry = False but if not, it describes if the entry admits just numbers or any character (boolean)
+  
   "color": ... #The color of the block (color name)
 }
 
