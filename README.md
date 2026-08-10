@@ -11,6 +11,7 @@ the blocks are:
 * wait()
 
 How the blocks are is writed in the list BLOCKS
+
 BLOCKS:
 {
   "type": ..., #The name of the block ("string")
